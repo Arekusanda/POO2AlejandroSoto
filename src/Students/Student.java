@@ -9,7 +9,7 @@ package Students;
 
 /**
  *
- * @author Administrador
+ * @author Alejandro Soto
  */
 public class Student {
     public int StudentIdentificationNumber;
