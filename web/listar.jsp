@@ -38,7 +38,7 @@
 });
 </script>
 	
-    <title>Tabla de datos</title>
+    <title>Operaciones con Registros</title>
 </head>
 
 <body style="background: url(images/bgnoise_lg.png) repeat left top;">
@@ -83,7 +83,7 @@ try {
 Class.forName("sun.jdbc.odbc.JdbcOdbcDriver") ;
 
 // Connect with a url string
-      canal = DriverManager.getConnection("jdbc:odbc:dsnmibase");
+      canal = DriverManager.getConnection("jdbc:odbc:dsnbdproductos");
 
 instruccion = canal.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 
@@ -93,7 +93,7 @@ ResultSet.CONCUR_UPDATABLE);
 
 // construyendo select con condicion
 
-String q="select * from mitabla";
+String q="select * from tblproductos";
 
 // mandando el sql a la base de datos
 
@@ -103,7 +103,8 @@ try { tabla = instruccion.executeQuery(q);
 
 out.println("<TABLE Border=10 CellPadding=5><TR>");
 
-out.println("<th bgcolor=Green>CLAVE</th><th bgcolor=White>NOMBRE</th><th bgcolor=Red>EDAD</th></TR>");
+out.println("<th bgcolor=Green>CÓDIGO</th><th bgcolor=White>NOMBRE</th><th bgcolor=Red>DESCRIPCIÓN</th>"
+        + "<th bgcolor=Red>CANTIDAD</th><th bgcolor=Red>PRECIO UNITARIO</th></TR>");
 
 while(tabla.next()) {
 
@@ -114,6 +115,10 @@ out.println("<TD>"+tabla.getString(1)+"</TD>");
 out.println("<TD>"+tabla.getString(2)+"</TD>");
 
 out.println("<TD>"+tabla.getString(3)+"</TD>");
+
+out.println("<TD>"+tabla.getString(4)+"</TD>");
+
+out.println("<TD>"+tabla.getString(5)+"</TD>");
 
 out.println("</TR>"); }; // fin while
 

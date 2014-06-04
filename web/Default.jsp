@@ -26,7 +26,7 @@
 	<script src="js/modernizr-2.0.6.min.js" type="text/javascript"></script> 
 	<!-- end JS -->
 	
-    <title>Tabla de datos</title>
+    <title>Operaciones con Registros</title>
 </head>
 
 <body style="background: url(images/bgnoise_lg.png) repeat left top;">

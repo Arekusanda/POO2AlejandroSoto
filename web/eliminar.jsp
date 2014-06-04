@@ -27,7 +27,7 @@
 	<script src="js/modernizr-2.0.6.min.js" type="text/javascript"></script> 
 	<!-- end JS -->
 	
-    <title>Tabla de datos</title>
+    <title>Operaciones con Registros</title>
 </head>
 
 <body style="background: url(images/bgnoise_lg.png) repeat left top;">
@@ -72,7 +72,7 @@ try {
 Class.forName("sun.jdbc.odbc.JdbcOdbcDriver") ;
 
 // Connect with a url string
-      canal = DriverManager.getConnection("jdbc:odbc:dsnmibase");
+      canal = DriverManager.getConnection("jdbc:odbc:dsnbdproductos");
 
 instruccion = canal.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 
@@ -82,14 +82,14 @@ ResultSet.CONCUR_UPDATABLE);
 
 // preparando condicion de busqueda
 
-int clave = Integer.parseInt(request.getParameter("CLAVEB"));
+int código = Integer.parseInt(request.getParameter("CÓDIGOB"));
 
 // construyendo select con condicion
 
-String q="delete from mitabla where clave="+clave;
+String q="delete from tblproductos where código="+código;
 
 instruccion.execute(q);
-q= "select * from mitabla";
+q= "select * from tblproductos";
 
 // mandando el sql a la base de datos
 
@@ -99,7 +99,8 @@ try { tabla = instruccion.executeQuery(q);
 
 out.println("<TABLE Border=10 CellPadding=5><TR>");
 
-out.println("<th bgcolor=Green>CLAVE</th><th bgcolor=White>NOMBRE</th><th bgcolor=Red>EDAD</th></TR>");
+out.println("<th bgcolor=Green>CÓDIGO</th><th bgcolor=White>NOMBRE</th><th bgcolor=Red>DESCRIPCIÓN</th>"
+        + "<th bgcolor=Red>CANTIDAD</th><th bgcolor=Red>PRECIO UNITARIO</th></TR>");
 
 while(tabla.next()) {
 
@@ -111,6 +112,10 @@ out.println("<TD>"+tabla.getString(2)+"</TD>");
 
 out.println("<TD>"+tabla.getString(3)+"</TD>");
 
+out.println("<TD>"+tabla.getString(4)+"</TD>");
+
+out.println("<TD>"+tabla.getString(5)+"</TD>");
+
 out.println("</TR>"); }; // fin while
 
 out.println("</TABLE></CENTER></DIV></HTML>");
@@ -118,6 +123,8 @@ out.println("</TABLE></CENTER></DIV></HTML>");
 } //fin try no usar ; al final de dos o mas catchs
 
 catch(SQLException e) {};
+
+out.println("EL PRODUCTO FUE ELIMINADO");
 
 try {tabla.close();instruccion.close();canal.close();} catch(SQLException e) {};
 
@@ -127,7 +134,7 @@ try {tabla.close();instruccion.close();canal.close();} catch(SQLException e) {};
 
 out.println("<FORM ACTION=eliminar.jsp METHOD=post>");
 
-out.println("CLAVE ELIMINAR:<INPUT TYPE=TEXT NAME=CLAVEB><BR>");
+out.println("CÓDIGO ELIMINAR:<INPUT TYPE=TEXT NAME=CÓDIGOB><BR>");
 
 out.println("<INPUT TYPE=SUBMIT NAME=OK VALUE=ELIMINAR><BR>");
 
